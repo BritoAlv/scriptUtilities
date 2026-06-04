@@ -32,8 +32,6 @@ def read_readme_description(utility_dir: Path, max_lines: int = 100) -> str | No
 
 def discover_utilities(root_dir: Path) -> list[UtilityDto]:
     utilities = []
-    index = 0
-
     subdirs = sorted(
         [d for d in root_dir.iterdir() if d.is_dir() and not d.name.startswith(".")]
     )
@@ -42,10 +40,9 @@ def discover_utilities(root_dir: Path) -> list[UtilityDto]:
         main_sh = subdir / "main.sh"
         if main_sh.exists():
             description = read_readme_description(subdir)
-            utilities[index] = UtilityDto(
+            utilities.append(UtilityDto(
                 name=subdir.name, path=main_sh, description=description
-            )
-            index += 1
+            ))
 
     return utilities
 
@@ -81,7 +78,7 @@ def get_user_choice(utilities: list[UtilityDto]) -> int | None:
             if choice_int == 0:
                 return None
 
-            if choice_int > len(utilities):
+            if choice_int <= len(utilities):
                 return choice_int
             else:
                 print(f"Invalid choice. Please select 0-{len(utilities)}")
