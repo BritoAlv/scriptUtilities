@@ -40,29 +40,23 @@ def discover_utilities(root_dir: Path) -> list[UtilityDto]:
         main_sh = subdir / "main.sh"
         if main_sh.exists():
             description = read_readme_description(subdir)
-            utilities.append(UtilityDto(
-                name=subdir.name, path=main_sh, description=description
-            ))
+            utilities.append(
+                UtilityDto(name=subdir.name, path=main_sh, description=description)
+            )
 
     return utilities
 
 
 def display_menu(utilities: list[UtilityDto]):
-    """Display the utilities menu"""
-    print("\n" + "=" * 50)
-    print("  UTILITIES LAUNCHER")
-    print("=" * 50)
-    print("\nAvailable utilities:\n")
+    print("Available utilities:")
 
     for index, utility in enumerate(utilities):
         print(f"  {index + 1}. {utility.name}")
         description = utility.description
         if description:
             desc_lines = description.split("\n")
-            for line in desc_lines[:3]:
+            for line in desc_lines:
                 print(f"      {line}")
-            if len(desc_lines) > 3:
-                print("      ... (see full description after selection)")
         print()
 
     print("  0. Exit")
@@ -72,7 +66,7 @@ def display_menu(utilities: list[UtilityDto]):
 def get_user_choice(utilities: list[UtilityDto]) -> int | None:
     while True:
         try:
-            choice = input("Select a utility (0 to exit): ").strip()
+            choice = input("Select a utility (0 to exit): ")
             choice_int = int(choice)
 
             if choice_int == 0:
