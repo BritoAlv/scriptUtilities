@@ -16,7 +16,7 @@ except Exception as e:
     print("There should be a file named api_key.txt with your API key in it")
     print("Error reading API key from file: ", e)
 
-prompt = """I wrote some personal notes on markdown, they are missing the latex symbols that makes math rendering nice, I would like you to add those to my text. When doing so, do not change what I wrote, even if you think it's bad spelled, or it makes no sense. Answer with only the markdown, do not add any comment, and do not add any text that is not in the markdown. Use align whenever possible. Try to catch all the numbers, math expresions, that needs latex symbols to be properly rendered.
+prompt = """I wrote some personal notes on markdown, they are missing the latex symbols that makes math rendering nice, I would like you to add those to my text. When doing so, do not change what I wrote, even if you think it's bad spelled, or it makes no sense. Answer with only the markdown, do not add any comment, and do not add any text that is not in the markdown. Use align whenever possible. Try to catch all the numbers, math expresions, that needs latex symbols to be properly rendered. Don't' put a space before and after the dollar signs, I mean this $a$, not this $ a $. You sometimes miss isolated integers like 0, or the implies arrows like =>.
 """
 
 
